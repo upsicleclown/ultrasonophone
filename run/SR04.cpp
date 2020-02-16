@@ -1,3 +1,4 @@
+#include "Arduino.h"
 #include "SR04.h"
 
 SR04::SR04(int echoPin, int trigPin){
@@ -8,26 +9,26 @@ SR04::SR04(int echoPin, int trigPin){
     distance = 0;
 }
 
+void SR04::pwm(int delH, int delL){
+    digitalWrite(trig, LOW);
+    delayMicroseconds(delH);
+  
+    // Sets the trigPin on HIGH state for 10 micro seconds
+    digitalWrite(trig, HIGH);
+    delayMicroseconds(delL);
+    digitalWrite(trig, LOW);
+
+}
 int SR04:: getDistance(){
     
     pwm(2, 10);
-    duration = pulseIn(echoPin, HIGH);
+    duration = pulseIn(echo, HIGH);
     distance = mstocm();
 
     return distance;
 }
 
-void SR04::pwm(int delH, int delL){
-    digitalWrite(trigPin, LOW);
-    delayMicroseconds(delH);
-  
-    // Sets the trigPin on HIGH state for 10 micro seconds
-    digitalWrite(trigPin, HIGH);
-    delayMicroseconds(delL);
-    digitalWrite(trigPin, LOW);
-
-}
-
-int mstocm(){
-    duration*0.034/2;
+int SR04::mstocm(){
+    int dist = duration*0.034/2;
+    return dist;
 }

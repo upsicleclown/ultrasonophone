@@ -1,14 +1,20 @@
+#include "Arduino.h"
 #include "Octave.h"
-a = 1.059;
-f = 261.63;
-Octave::(int id){
+
+Octave::Octave(int id, double ff){
+    double f = ff;
     _id = id;
-    for(int j = 0; i< 12; i++){
-        notes[j] = 1000000/c4;
-        c4*=a;
+    notes[0] = f;
+    Serial.print(_id);
+    for(int j = 1 ; j< 13; j++){
+        notes[j] = 1000000/f;
+        //Serial.print(j);
+        //Serial.print(" note: ");
+        Serial.println(notes[j]);
+        f = f * a;
     }
 }
 
-int Octave:: getNote(int j){
-    return notes[j]
+int Octave::getNote(int j){
+    return notes[j];
 }
