@@ -7,9 +7,9 @@ SR04 s1 = SR04(8,9);
 SR04 s2 = SR04(10,11);
 SR04 s3 = SR04(12,13);
 
-Octave o1 = Octave(0, 261.6);
-Octave o2 = Octave(1, o1.getNote(12));
-Octave o3 = Octave(2, o2.getNote(12));
+Octave o1 = Octave(0);
+Octave o2 = Octave(1);
+Octave o3 = Octave(2);
 int speakerOut = 5;
 
 void setup() {
@@ -21,7 +21,7 @@ void setup() {
 void playNote(int distance, Octave octave){
   if(distance >=2 && distance < 38){
       int j = (distance - 2)/3;
-      tone(speakerOut, octave.getNote(j+1));
+      tone(speakerOut, octave.getNote(j));
     }  
 }
 
